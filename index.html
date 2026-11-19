@@ -79,6 +79,7 @@ h2{font:800 clamp(2rem,4.5vw,3.1rem) var(--head);line-height:1.1;letter-spacing:
 .sechead{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:12px}
 .sechead .lead{margin-bottom:0}
 .fblock{margin-top:46px}
+.fblock:has(>[hidden]){margin-top:0}
 .fbhead{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:20px}
 .fbhead h3{font:800 1.55rem var(--head);letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
 .fbhead h3 .bico{width:22px;height:22px}
@@ -122,9 +123,24 @@ h2{font:800 clamp(2rem,4.5vw,3.1rem) var(--head);line-height:1.1;letter-spacing:
 .vp .frame.tall{width:min(400px,100%,calc((100vh - 140px)*9/16));aspect-ratio:9/16}
 .vp .frame.ig{background:#fff;width:min(420px,100%);aspect-ratio:auto;height:min(760px,calc(100vh - 120px))}
 .vp iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vp .x,.vp .open-on{z-index:5}
 .vp .x{position:absolute;top:10px;right:16px;background:none;border:0;color:#fff;font-size:2.6rem;cursor:pointer;padding:6px 12px;line-height:1}
 .vp .open-on{position:absolute;bottom:18px;left:0;right:0;text-align:center}
 .vp .open-on a{color:#dfe9d8;text-decoration:underline;font-size:.95rem}
+.vp .frame.reel{width:min(420px,100%,calc((100vh - 150px)*9/16));aspect-ratio:9/16;background:#000}
+.vp video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000}
+.vp .nav{position:absolute;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;border:0;cursor:pointer;
+  background:rgba(255,255,255,.14);color:#fff;font-size:1.9rem;line-height:1;display:none;place-items:center;transition:.2s}
+.vp .nav:hover{background:var(--orange)}
+.vp.reelmode .nav{display:grid}
+.vp .prev{left:max(12px,calc(50% - 300px))}.vp .next{right:max(12px,calc(50% - 300px))}
+.vp .rinfo{position:absolute;left:0;right:0;top:0;z-index:2;padding:16px 16px 40px;color:#fff;font-size:.9rem;line-height:1.4;
+  background:linear-gradient(rgba(0,0,0,.65),transparent);pointer-events:none}
+.vp .rinfo b{display:inline-flex;align-items:center;gap:6px;margin-bottom:4px}
+.vp .rinfo b svg{width:16px;height:16px;fill:#fff}
+.vp .rinfo span{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;opacity:.9}
+.thumb video.pv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+@media(max-width:600px){.vp .nav{display:none!important}.vp{padding:0}.vp .frame.reel{width:100%;height:100%;aspect-ratio:auto;border-radius:0;max-height:100vh}.vp .open-on{bottom:auto;top:auto;bottom:70px;right:12px;left:auto;text-align:right}.vp .frame.reel video{bottom:0}.vp .rinfo{padding-right:60px}}
 
 /* about + contact */
 .about{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:60px;align-items:center}
@@ -152,7 +168,7 @@ footer{padding:30px 0 40px;text-align:center;font-size:.92rem;color:var(--leaf)}
   <div class="r" aria-hidden="true"></div>
 </div>
 <div class="navbar"><div class="wrap" id="nav">
-  <a href="#top" class="on">Home</a><a href="#gallery">Photos</a><a href="#social">Social</a><a href="#about">About</a><a href="#contact">Contact</a>
+  <a href="#top" class="on">Home</a><a href="#gallery">Photos</a><a href="#reels" id="navReels">Reels</a><a href="#videos" id="navVideos">Videos</a><a href="#about">About</a><a href="#contact">Contact</a>
 </div></div>
 
 <main id="top">
@@ -185,16 +201,16 @@ footer{padding:30px 0 40px;text-align:center;font-size:.92rem;color:var(--leaf)}
       <div class="soc" id="socSec"></div>
     </div>
 
-    <div class="fblock" id="igBlock" hidden>
+    <div class="fblock" id="reels"><div id="igBlock" hidden>
       <div class="fbhead">
         <h3><span data-ico="instagram"></span>Instagram reels</h3>
         <a class="ghost" id="igFollow" target="_blank" rel="noopener">Follow on Instagram</a>
       </div>
       <div class="rgrid" id="igGrid"></div>
       <div class="morebar"><button class="btn" id="igMore" type="button" hidden>Load more reels</button></div>
-    </div>
+    </div></div>
 
-    <div class="fblock" id="ytBlock" hidden>
+    <div class="fblock" id="videos"><div id="ytBlock" hidden>
       <div class="fbhead">
         <h3><span data-ico="youtube"></span>YouTube</h3>
         <div class="tabs" role="tablist" aria-label="Filter videos">
@@ -206,7 +222,7 @@ footer{padding:30px 0 40px;text-align:center;font-size:.92rem;color:var(--leaf)}
       </div>
       <div class="vgrid" id="ytGrid" role="tabpanel"></div>
       <div class="morebar"><button class="btn" id="ytMore" type="button" hidden>Load more videos</button></div>
-    </div>
+    </div></div>
 
     <div class="feedempty" id="feedEmpty" hidden>
       <p>New reels and videos will appear here soon. Meanwhile, find me on:</p>
@@ -242,6 +258,8 @@ footer{padding:30px 0 40px;text-align:center;font-size:.92rem;color:var(--leaf)}
 
 <div class="vp" id="vp" role="dialog" aria-modal="true" aria-label="Video player">
   <button class="x" aria-label="Close video">×</button>
+  <button class="nav prev" type="button" aria-label="Previous reel">‹</button>
+  <button class="nav next" type="button" aria-label="Next reel">›</button>
   <div class="frame" id="vpFrame"></div>
   <p class="open-on"><a id="vpLink" target="_blank" rel="noopener">Open on Instagram</a></p>
 </div>
@@ -288,7 +306,7 @@ $('yr').textContent=new Date().getFullYear();
 /* nav highlight */
 const links=[...document.querySelectorAll('#nav a')];
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id))}),{rootMargin:'-45% 0px -50% 0px'});
-['top','gallery','social','about','contact'].forEach(id=>io.observe(document.getElementById(id)));
+['top','gallery','reels','videos','about','contact'].forEach(id=>io.observe(document.getElementById(id)));
 
 /* gallery + finder */
 const grid=document.getElementById('grid'),empty=document.getElementById('empty');
@@ -370,6 +388,19 @@ function drawYT(more){
   $('ytMore').hidden=ytShown>=list.length;
 }
 $('igMore').onclick=()=>drawIG(true);
+/* desktop: silent preview while the mouse is over a reel */
+if(matchMedia('(hover:hover)').matches){
+  $('igGrid').addEventListener('mouseover',e=>{
+    const t=e.target.closest('.tile');if(!t||t.querySelector('video.pv'))return;
+    const r=IG.find(x=>x.id===t.dataset.id);if(!r||!r.video)return;
+    const v=document.createElement('video');v.className='pv';v.src=r.video;v.muted=true;v.loop=true;v.playsInline=true;
+    v.onerror=()=>v.remove();t.querySelector('.thumb').appendChild(v);v.play().catch(()=>v.remove());
+  });
+  $('igGrid').addEventListener('mouseout',e=>{
+    const t=e.target.closest('.tile');if(!t||t.contains(e.relatedTarget))return;
+    t.querySelector('video.pv')?.remove();
+  });
+}
 $('ytMore').onclick=()=>drawYT(true);
 document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
   ytFilter=b.dataset.f;
@@ -379,29 +410,63 @@ document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
 
 /* player: nothing plays until the visitor clicks */
 const vp=$('vp'),vpFrame=$('vpFrame'),vpLink=$('vpLink');
+let reelIdx=-1;
+function igEmbed(item){
+  vp.classList.remove('reelmode');
+  vpFrame.className='frame ig';
+  vpFrame.innerHTML=item.embed?`<iframe src="${esc(item.embed)}" title="Instagram reel" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`:'';
+}
+function playReel(i){
+  reelIdx=(i+IG.length)%IG.length;const item=IG[reelIdx];
+  vpLink.href=item.url;vpLink.textContent='Open on Instagram';
+  if(!item.video){igEmbed(item);return}
+  vp.classList.add('reelmode');
+  vpFrame.className='frame reel';
+  const views=Number.isFinite(item.views)?`<b>${PLAY} ${fmtN(item.views)} views</b><br>`:'';
+  const cap=item.caption?`<span>${esc(item.caption)}</span>`:'';
+  // Plays here on the website. Starts only because the visitor clicked.
+  vpFrame.innerHTML=`<video src="${esc(item.video)}" ${item.thumb?`poster="${esc(item.thumb)}"`:''} controls autoplay playsinline loop preload="auto"></video>${views||cap?`<div class="rinfo">${views}${cap}</div>`:''}`;
+  const v=vpFrame.querySelector('video');
+  v.onerror=()=>igEmbed(item); // link expired or blocked: fall back to Instagram's own player
+  v.play().catch(()=>{});
+  // preload the next reel's poster for a smooth swipe
+  const nx=IG[(reelIdx+1)%IG.length];if(nx&&nx.thumb)new Image().src=nx.thumb;
+}
+vp.querySelector('.prev').onclick=e=>{e.stopPropagation();playReel(reelIdx-1)};
+vp.querySelector('.next').onclick=e=>{e.stopPropagation();playReel(reelIdx+1)};
+document.addEventListener('keydown',e=>{
+  if(!vp.classList.contains('open')||!vp.classList.contains('reelmode'))return;
+  if(e.key==='ArrowRight'||e.key==='ArrowDown'){e.preventDefault();playReel(reelIdx+1)}
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();playReel(reelIdx-1)}
+});
+// swipe up/down on phones, like Instagram
+let ty=null;
+vp.addEventListener('touchstart',e=>{ty=e.touches[0].clientY},{passive:true});
+vp.addEventListener('touchend',e=>{
+  if(ty===null||!vp.classList.contains('reelmode'))return;
+  const d=e.changedTouches[0].clientY-ty;ty=null;
+  if(Math.abs(d)>60)playReel(reelIdx+(d<0?1:-1));
+},{passive:true});
 function openVideo(item){
   if(item.source==='instagram'){
-    vpFrame.className='frame ig';
-    vpFrame.innerHTML=item.embed?`<iframe src="${esc(item.embed)}" title="Instagram reel" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`:'';
-    vpLink.textContent='Open on Instagram';
+    playReel(IG.indexOf(item));
   }else{
+    vp.classList.remove('reelmode');
     vpFrame.className='frame'+(item.type==='short'?' tall':'');
     vpFrame.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(item.videoId)}?autoplay=1&rel=0&playsinline=1&modestbranding=1" title="${esc(item.title)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
     vpLink.textContent='Watch on YouTube';
   }
-  vpLink.href=item.url;
+  if(item.source!=='instagram')vpLink.href=item.url;
   vp.classList.add('open');document.body.style.overflow='hidden';
   vp.querySelector('.x').focus();
 }
-function closeVideo(){vp.classList.remove('open');vpFrame.innerHTML='';document.body.style.overflow=''}
+function closeVideo(){vp.classList.remove('open','reelmode');vpFrame.innerHTML='';document.body.style.overflow=''}
 vp.querySelector('.x').onclick=closeVideo;
 vp.onclick=e=>{if(e.target===vp)closeVideo()};
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&vp.classList.contains('open'))closeVideo()});
 $('social').addEventListener('click',e=>{
   const t=e.target.closest('.tile');if(!t)return;
   const item=[...IG,...YT].find(x=>x.id===t.dataset.id);if(!item)return;
-  // very small phones: open the app/site directly, it plays more smoothly there
-  if(window.innerWidth<360){window.open(item.url,'_blank','noopener');return}
   openVideo(item);
 });
 
@@ -412,6 +477,7 @@ fetch('/api/social-feed').then(r=>r.ok?r.json():null).then(d=>{
   if(igUrl)$('igFollow').href=igUrl;else $('igFollow').hidden=true;
   if(ytUrl)$('ytFollow').href=ytUrl;else $('ytFollow').hidden=true;
   $('igBlock').hidden=!IG.length;$('ytBlock').hidden=!YT.length;
+  $('navReels').hidden=!IG.length;$('navVideos').hidden=!YT.length;
   if(IG.length)drawIG();
   if(YT.length){
     const hasS=YT.some(v=>v.type==='short'),hasV=YT.some(v=>v.type==='video');
@@ -419,7 +485,7 @@ fetch('/api/social-feed').then(r=>r.ok?r.json():null).then(d=>{
     drawYT();
   }
   $('feedEmpty').hidden=!!(IG.length||YT.length);
-}).catch(()=>{$('feedEmpty').hidden=false});
+}).catch(()=>{$('feedEmpty').hidden=false;$('navReels').hidden=$('navVideos').hidden=true});
 </script>
 </body>
 </html>
