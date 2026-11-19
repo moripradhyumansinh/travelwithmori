@@ -15,6 +15,14 @@
       "footer": true,
       "label": "travelwithmori",
       "url": "https://www.youtube.com/@travelwithmori"
+    },
+    {
+      "platform": "facebook",
+      "enabled": true,
+      "header": true,
+      "footer": true,
+      "label": "travelwithmori",
+      "url": "https://www.facebook.com/Travelwithmori/"
     }
   ],
   "extra_videos": []
