@@ -7,6 +7,15 @@
       "footer": true,
       "label": "travelwithmori",
       "url": "https://www.instagram.com/travelwithmori"
+    },
+    {
+      "platform": "youtube",
+      "enabled": true,
+      "header": true,
+      "footer": true,
+      "label": "travelwithmori",
+      "url": "https://www.youtube.com/@travelwithmori"
     }
-  ]
+  ],
+  "extra_videos": []
 }
