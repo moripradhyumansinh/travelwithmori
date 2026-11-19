@@ -64,7 +64,7 @@ async function withLock(fn) {
 var social_feed_default = async () => {
   const [ig2, yt2, hidden, s] = await Promise.all([getSource("instagram"), getSource("youtube"), getHidden(), getSettings()]);
   const visible = (src, on) => on ? (src.items || []).filter((i) => !hidden[i.id]) : [];
-  const pick = ({ id, source, type, url, embed, thumb, caption, title, videoId, duration, views, publishedAt }) => ({ id, source, type, url, embed, thumb, caption, title, videoId, duration, views, publishedAt });
+  const pick = ({ id, source, type, url, embed, thumb, video, caption, title, videoId, duration, views, publishedAt }) => ({ id, source, type, url, embed, thumb, video, caption, title, videoId, duration, views, publishedAt });
   const body = {
     instagram: { items: visible(ig2, s.instagramEnabled).map(pick), profile: ig2.profile || null, lastSync: ig2.lastSync },
     youtube: { items: visible(yt2, s.youtubeEnabled).map(pick), profile: yt2.profile || null, lastSync: yt2.lastSync }
@@ -245,6 +245,8 @@ async function fetchReels(previous = [], deadline = Date.now() + 8e3) {
       url: m.permalink,
       embed: m.permalink ? m.permalink.split("?")[0].replace(/\/?$/, "/embed") : null,
       thumb: m.thumbnail_url || old?.thumb || null,
+      video: m.media_url || null,
+      // the reel's video file, so it can play right on the website
       caption: (m.caption || "").slice(0, 400),
       views: old?.views ?? null,
       viewsAt: old?.viewsAt || 0,
