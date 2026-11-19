@@ -29,3 +29,73 @@ collections:
                 widget: select
                 options: [Mammals, Birds, Reptiles, Insects, Landscapes, Travel]
               - { label: Place, name: loc, widget: string, required: false }
+
+  - name: social
+    label: Social media
+    files:
+      - name: links
+        label: Social links
+        file: data/socials.json
+        format: json
+        fields:
+          - label: Social links
+            name: links
+            widget: list
+            label_singular: social link
+            hint: "Drag the links up or down to change the order of the icons on your website."
+            summary: "{{fields.label}} ({{fields.platform}})"
+            fields:
+              - label: Platform
+                name: platform
+                widget: select
+                default: instagram
+                options:
+                  - { label: Instagram, value: instagram }
+                  - { label: YouTube, value: youtube }
+                  - { label: Facebook, value: facebook }
+                  - { label: LinkedIn, value: linkedin }
+                  - { label: TikTok, value: tiktok }
+                  - { label: X (Twitter), value: x }
+                  - { label: Pinterest, value: pinterest }
+                  - { label: WhatsApp, value: whatsapp }
+                  - { label: Threads, value: threads }
+                  - { label: Snapchat, value: snapchat }
+                  - { label: Telegram, value: telegram }
+                  - { label: Website, value: website }
+                  - { label: Email, value: email }
+                  - { label: Other (custom), value: custom }
+              - label: Name shown on hover
+                name: label
+                widget: string
+                required: false
+              - label: Link
+                name: url
+                widget: string
+                hint: "Full link, e.g. https://www.instagram.com/travelwithmori. WhatsApp: https://wa.me/91XXXXXXXXXX. Email: mailto:you@example.com"
+                pattern: ['^(https?://|mailto:|tel:).+', "Start the link with https://, mailto: or tel:"]
+              - label: Show on website
+                name: enabled
+                widget: boolean
+                default: true
+              - label: Show in header
+                name: header
+                widget: boolean
+                default: true
+              - label: Show in footer
+                name: footer
+                widget: boolean
+                default: true
+              - label: Custom icon (optional)
+                name: icon
+                widget: image
+                required: false
+                hint: "Leave empty to use the platform's official icon. Upload a small square PNG or SVG for a custom platform."
+          - label: Extra YouTube videos (optional)
+            name: extra_videos
+            widget: list
+            required: false
+            label_singular: video
+            hint: "Your own channel syncs automatically. Add links here only for videos on other channels (for example collaborations)."
+            summary: "{{fields.url}}"
+            fields:
+              - { label: YouTube link, name: url, widget: string }
