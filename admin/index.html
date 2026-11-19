@@ -2,6 +2,19 @@
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex"><title>Photo admin</title>
+<style>
+#syncBtn{position:fixed;right:20px;bottom:20px;z-index:9999;display:none;align-items:center;gap:8px;background:#0c4a2b;color:#f8f1e3;
+  font:600 14px/1 system-ui,sans-serif;padding:13px 20px;border-radius:99px;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+#syncBtn:hover{background:#e8803f}
+</style>
 </head><body>
+<a id="syncBtn" href="/admin/social.html">⟳ Social sync dashboard</a>
 <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+<script>
+// Show the dashboard button once you are logged in.
+setInterval(function(){
+  var on=!!(localStorage.getItem('decap-cms-user')||localStorage.getItem('netlify-cms-user'));
+  document.getElementById('syncBtn').style.display=on?'inline-flex':'none';
+},1000);
+</script>
 </body></html>
