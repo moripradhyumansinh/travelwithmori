@@ -1,7 +1,7 @@
 # The website files are copied into "dist" so that code and settings
 # (netlify/, package.json, node_modules) are never published.
 [build]
-  command = "mkdir -p dist && cp -r index.html photos.json photos admin data dist/"
+  command = "mkdir -p dist photos data && cp -r index.html photos.json photos admin data dist/"
   publish = "dist"
 
 [functions]
