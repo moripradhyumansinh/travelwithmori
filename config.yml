@@ -1,0 +1,31 @@
+# Photo admin (Decap CMS). Change YOUR_GITHUB_USERNAME/YOUR_REPO_NAME below.
+backend:
+  name: github
+  repo: YOUR_GITHUB_USERNAME/YOUR_REPO_NAME
+  branch: main
+
+media_folder: "photos/uploads"
+public_folder: "/photos/uploads"
+
+collections:
+  - name: gallery
+    label: Photo gallery
+    files:
+      - name: photos
+        label: All photos
+        file: photos.json
+        format: json
+        fields:
+          - label: Photos
+            name: photos
+            widget: list
+            label_singular: photo
+            summary: "{{fields.title}} ({{fields.cat}})"
+            fields:
+              - { label: Photo, name: src, widget: image }
+              - { label: Title, name: title, widget: string }
+              - label: Category
+                name: cat
+                widget: select
+                options: [Mammals, Birds, Reptiles, Insects, Landscapes, Travel]
+              - { label: Place, name: loc, widget: string, required: false }
