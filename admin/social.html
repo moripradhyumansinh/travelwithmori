@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Social sync – travelwithmori admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#f8f1e3;--green:#0c4a2b;--leaf:#1f6b45;--orange:#e8803f;--white:#fff;--line:rgba(12,74,43,.14);--red:#b3261e;--ok:#1f8a4c;
+  --head:'Bricolage Grotesque',system-ui,sans-serif;--body:'Figtree',system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--cream);color:var(--green);font:400 16px/1.55 var(--body);padding-bottom:60px}
+a{color:inherit}
+.wrap{width:min(1100px,100% - 32px);margin-inline:auto}
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 0;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:10px;font:800 1.5rem var(--head);text-decoration:none}
+.logo i{width:24px;height:24px;border-radius:50%;background:var(--orange);box-shadow:6px 5px 0 -2px var(--green)}
+.logo small{font:500 .95rem var(--body);color:var(--leaf);margin-left:6px}
+nav a{margin-left:18px;font-weight:600;text-decoration:none}
+nav a:hover{color:var(--orange)}
+h1{font:800 clamp(1.8rem,4vw,2.5rem) var(--head);letter-spacing:-.02em;margin:10px 0 4px}
+h2{font:800 1.3rem var(--head);display:flex;align-items:center;gap:10px}
+.sub{color:var(--leaf);margin-bottom:26px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px}
+.card{background:var(--white);border:1px solid var(--line);border-radius:22px;padding:24px}
+.card p{margin-top:8px}
+.muted{color:var(--leaf);font-size:.93rem}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:16px}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--orange);color:#fff;font:600 .95rem var(--body);border:0;border-radius:99px;padding:11px 22px;cursor:pointer;text-decoration:none;transition:.2s}
+.btn:hover{background:#d26f30}
+.btn.dark{background:var(--green)}.btn.dark:hover{background:var(--leaf)}
+.btn.line{background:none;color:var(--green);border:1px solid var(--green)}
+.btn.line:hover{background:var(--green);color:var(--cream)}
+.btn.small{padding:7px 14px;font-size:.85rem}
+.btn[disabled]{opacity:.5;cursor:wait}
+input[type=text],input[type=password],select{font:500 .95rem var(--body);color:var(--green);border:1px solid var(--line);border-radius:12px;padding:10px 14px;background:var(--cream);min-width:0;flex:1}
+label.field{display:block;font-weight:600;margin-top:14px}
+label.field span{display:block;font-weight:400;font-size:.88rem;color:var(--leaf)}
+.dot{display:inline-flex;align-items:center;gap:7px;font-size:.88rem;font-weight:600;padding:4px 12px;border-radius:99px;background:var(--cream)}
+.dot:before{content:"";width:9px;height:9px;border-radius:50%;background:#9aa}
+.dot.ok:before{background:var(--ok)}.dot.err:before{background:var(--red)}.dot.warn:before{background:var(--orange)}
+.alert{border-radius:16px;padding:14px 18px;margin-bottom:18px;font-weight:500;display:flex;gap:10px;align-items:flex-start}
+.alert.err{background:#fbe4e1;color:var(--red)}
+.alert.ok{background:#e1f3e7;color:var(--ok)}
+.alert.info{background:#fff3e6;color:#8a4a17}
+.switch{position:relative;display:inline-flex;align-items:center;gap:12px;cursor:pointer;font-weight:600}
+.switch input{position:absolute;opacity:0}
+.switch i{width:46px;height:26px;border-radius:99px;background:#cfd8d2;position:relative;transition:.2s;flex:none}
+.switch i:after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:.2s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.switch input:checked+i{background:var(--ok)}
+.switch input:checked+i:after{left:23px}
+.switch input:focus-visible+i{outline:2px solid var(--orange);outline-offset:2px}
+details{margin-top:14px}
+summary{cursor:pointer;font-weight:600;color:var(--leaf)}
+.ico{width:22px;height:22px;fill:currentColor}
+section{margin-top:34px}
+.tabs{display:inline-flex;gap:6px;background:var(--white);border:1px solid var(--line);border-radius:99px;padding:5px;margin:14px 0 18px}
+.tabs button{border:0;background:none;font:600 .9rem var(--body);color:var(--green);padding:8px 16px;border-radius:99px;cursor:pointer}
+.tabs button[aria-selected=true]{background:var(--green);color:var(--cream)}
+.posts{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:16px}
+.post{background:var(--white);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
+.post .th{aspect-ratio:9/12;background:#e8dcc3 center/cover;position:relative}
+.post.hidden .th{filter:grayscale(1) opacity(.45)}
+.post .tag{position:absolute;top:8px;left:8px;background:rgba(0,0,0,.55);color:#fff;font-size:.75rem;font-weight:600;padding:3px 9px;border-radius:99px}
+.post .b{padding:10px 12px;display:flex;flex-direction:column;gap:8px;flex:1}
+.post .t{font-size:.86rem;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.7em}
+.post .m{font-size:.78rem;color:var(--leaf)}
+.post .btn{justify-content:center;margin-top:auto}
+.empty{color:var(--leaf);padding:20px 0}
+#login{display:none}
+code{background:var(--cream);padding:2px 6px;border-radius:6px;font-size:.88em;word-break:break-all}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="logo" href="/admin/"><i></i>travelwithmori <small>admin</small></a>
+    <nav><a href="/admin/">Photos &amp; links</a><a href="/" target="_blank" rel="noopener">View website ↗</a></nav>
+  </header>
+
+  <div id="login" class="card">
+    <h2>Please log in first</h2>
+    <p>Open the admin, click <b>Login with GitHub</b>, then come back to this page.</p>
+    <div class="row"><a class="btn" href="/admin/">Go to admin login</a></div>
+  </div>
+
+  <main id="app" hidden>
+    <h1>Social media sync</h1>
+    <p class="sub">Connect Instagram and YouTube once. New reels and videos then appear on your website by themselves.</p>
+    <div id="msgs"></div>
+
+    <div class="grid">
+      <!-- Instagram -->
+      <div class="card">
+        <h2><svg class="ico" viewBox="0 0 24 24"><path id="igPath"/></svg>Instagram reels</h2>
+        <div class="row"><span class="dot" id="igDot">Checking…</span></div>
+        <p class="muted" id="igInfo"></p>
+        <div class="row">
+          <button class="btn" id="igConnect">Connect Instagram</button>
+          <button class="btn line small" id="igDisconnect" hidden>Disconnect</button>
+        </div>
+        <details>
+          <summary>Connect with a token instead</summary>
+          <p class="muted">In the Meta developer dashboard, open <b>Instagram → API setup with Instagram login</b>, click <b>Generate token</b> next to your account, and paste it here.</p>
+          <div class="row"><input type="password" id="igToken" placeholder="Paste Instagram access token" autocomplete="off"><button class="btn dark small" id="igSaveToken">Save token</button></div>
+        </details>
+        <div class="row"><label class="switch"><input type="checkbox" id="igEnabled"><i></i>Show reels on website</label></div>
+      </div>
+
+      <!-- YouTube -->
+      <div class="card">
+        <h2><svg class="ico" viewBox="0 0 24 24"><path id="ytPath"/></svg>YouTube videos &amp; Shorts</h2>
+        <div class="row"><span class="dot" id="ytDot">Checking…</span></div>
+        <p class="muted" id="ytInfo"></p>
+        <label class="field">Your channel<span>Your @handle (for example @travelwithmori), channel link or channel ID</span></label>
+        <div class="row" style="margin-top:6px"><input type="text" id="ytChannel" placeholder="@yourchannel"><button class="btn dark small" id="ytSave">Connect channel</button></div>
+        <div class="row"><label class="switch"><input type="checkbox" id="ytEnabled"><i></i>Show videos on website</label></div>
+      </div>
+
+      <!-- Sync -->
+      <div class="card">
+        <h2>⟳ Sync settings</h2>
+        <p class="muted" id="lastRun">Last sync: –</p>
+        <div class="row"><label class="switch"><input type="checkbox" id="autoSync"><i></i>Automatic sync</label></div>
+        <label class="field">How often<span>Instagram and YouTube are checked for new posts this often</span></label>
+        <div class="row" style="margin-top:6px">
+          <select id="freq">
+            <option value="1">Every hour</option><option value="3">Every 3 hours</option><option value="6">Every 6 hours</option>
+            <option value="12">Every 12 hours</option><option value="24">Once a day</option>
+          </select>
+        </div>
+        <div class="row"><button class="btn" id="syncNow">⟳ Sync now</button></div>
+      </div>
+    </div>
+
+    <section>
+      <h2>Synced posts</h2>
+      <p class="muted">Hide a post to remove it from your website. It stays on Instagram or YouTube, and it stays hidden after future syncs.</p>
+      <div class="tabs" role="tablist">
+        <button role="tab" aria-selected="true" data-t="instagram">Instagram reels <span id="cIg"></span></button>
+        <button role="tab" aria-selected="false" data-t="youtube">YouTube <span id="cYt"></span></button>
+      </div>
+      <div class="posts" id="posts"></div>
+    </section>
+  </main>
+</div>
+
+<script>
+const IG_PATH="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077";
+const YT_PATH="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z";
+document.getElementById('igPath').setAttribute('d',IG_PATH);
+document.getElementById('ytPath').setAttribute('d',YT_PATH);
+
+const $=id=>document.getElementById(id);
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const when=d=>{if(!d)return'never';const m=Math.round((Date.now()-new Date(d))/60000);
+  if(m<1)return'just now';if(m<60)return m+' min ago';if(m<1440)return Math.round(m/60)+' h ago';return new Date(d).toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short'})};
+const fmtN=n=>new Intl.NumberFormat('en',{notation:'compact',maximumFractionDigits:1}).format(n);
+
+// The GitHub login from the Decap admin is reused here.
+function token(){
+  for(const k of ['decap-cms-user','netlify-cms-user']){
+    try{const u=JSON.parse(localStorage.getItem(k)||'null');if(u&&u.token)return u.token}catch{}
+  }
+  return null;
+}
+const TOKEN=token();
+if(!TOKEN){$('login').style.display='block'}else{$('app').hidden=false}
+
+async function api(action,data={}){
+  const r=await fetch('/api/social-admin',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+TOKEN},body:JSON.stringify({action,...data})});
+  const j=await r.json().catch(()=>({error:'The server did not answer. Is the site deployed with its functions?'}));
+  if(r.status===401){$('app').hidden=true;$('login').style.display='block'}
+  if(!r.ok)throw new Error(j.error||'Request failed');
+  return j;
+}
+function note(text,type='ok',sticky){
+  const d=document.createElement('div');d.className='alert '+type;d.textContent=text;
+  $('msgs').prepend(d);if(!sticky)setTimeout(()=>d.remove(),6000);
+}
+async function busy(btn,fn){
+  btn.disabled=true;const t=btn.textContent;
+  try{await fn()}catch(e){note(e.message,'err')}finally{btn.disabled=false;btn.textContent=t}
+}
+
+let S=null,tab='instagram';
+function dot(el,status,connected){
+  const map={ok:['ok','Synced'],error:['err','Sync failed'],disconnected:['err','Not connected'],off:['warn','Hidden from website'],never:['warn','Not synced yet']};
+  const [c,t]=connected===false?['err','Not connected']:(map[status]||['warn',status]);
+  el.className='dot '+c;el.textContent=t;
+}
+function render(){
+  const ig=S.instagram,yt=S.youtube,st=S.settings;
+  // error banners
+  $('msgs').querySelectorAll('.sticky').forEach(e=>e.remove());
+  const errs=[];
+  if(ig.error&&st.instagramEnabled)errs.push('Instagram: '+ig.error);
+  if(yt.error&&st.youtubeEnabled)errs.push('YouTube: '+yt.error);
+  if(!S.env.youtubeKey)errs.push('YouTube API key missing: add YOUTUBE_API_KEY in Netlify → Environment variables, then redeploy.');
+  errs.forEach(e=>{const d=document.createElement('div');d.className='alert err sticky';d.textContent='⚠ '+e;$('msgs').appendChild(d)});
+
+  // Instagram card
+  dot($('igDot'),ig.status,ig.connected);
+  const exp=ig.expiresAt?Math.round((ig.expiresAt-Date.now())/86400000):null;
+  $('igInfo').innerHTML=ig.connected
+    ?`Connected as <b>@${esc(ig.username)}</b> · ${ig.items.length} reels · last synced ${when(ig.lastSync)}<br>Connection renews itself automatically${exp!==null?` (currently valid ${exp} more days)`:''}.`
+    :(S.env.igApp?'Click Connect Instagram and log in with your Instagram Creator or Business account.':'Add IG_APP_ID and IG_APP_SECRET in Netlify first (see the setup guide), or use a token below.');
+  $('igConnect').textContent=ig.connected?'Reconnect Instagram':'Connect Instagram';
+  $('igDisconnect').hidden=!ig.connected;
+  $('igEnabled').checked=st.instagramEnabled;
+
+  // YouTube card
+  dot($('ytDot'),yt.status,!!st.youtubeChannel);
+  const sh=yt.items.filter(v=>v.type==='short').length;
+  $('ytInfo').innerHTML=st.youtubeChannel
+    ?`${yt.channel?`Channel <b>${esc(yt.channel.title)}</b> · `:''}${yt.items.length-sh} videos, ${sh} Shorts · last synced ${when(yt.lastSync)}`
+    :'Type your channel below and click Connect channel.';
+  if(document.activeElement!==$('ytChannel'))$('ytChannel').value=st.youtubeChannel||'';
+  $('ytSave').textContent=st.youtubeChannel?'Save channel':'Connect channel';
+  $('ytEnabled').checked=st.youtubeEnabled;
+
+  // Sync card
+  $('autoSync').checked=st.autoSync;$('freq').value=String(st.frequencyHours);$('freq').disabled=!st.autoSync;
+  $('lastRun').textContent='Last sync: '+when(S.lastRun)+(st.autoSync?` · next one within ${st.frequencyHours===1?'the hour':st.frequencyHours+' hours'}`:' · automatic sync is off');
+
+  $('cIg').textContent=`(${ig.items.length})`;$('cYt').textContent=`(${yt.items.length})`;
+  renderPosts();
+}
+function renderPosts(){
+  const items=S[tab].items;
+  $('posts').innerHTML=items.length?items.map(p=>{
+    const title=p.title||p.caption||'(no caption)';
+    const tag=p.source==='instagram'?'Reel':(p.type==='short'?'Short':'Video');
+    const views=Number.isFinite(p.views)?fmtN(p.views)+' views · ':'';
+    return `<div class="post${p.hidden?' hidden':''}">
+      <a class="th" href="${esc(p.url)}" target="_blank" rel="noopener" style="background-image:url('${esc(p.thumb||'')}')"><span class="tag">${p.hidden?'Hidden':tag}</span></a>
+      <div class="b"><div class="t">${esc(title)}</div><div class="m">${views}${p.publishedAt?new Date(p.publishedAt).toLocaleDateString('en-IN',{dateStyle:'medium'}):''}</div>
+      <button class="btn small ${p.hidden?'dark':'line'}" data-id="${esc(p.id)}" data-h="${p.hidden?0:1}">${p.hidden?'Show on website':'Hide from website'}</button></div></div>`;
+  }).join(''):'<p class="empty">No posts synced yet. Connect the account above, then click Sync now.</p>';
+}
+
+async function load(){try{S=await api('status');render()}catch(e){note(e.message,'err',true)}}
+
+$('posts').onclick=e=>{
+  const b=e.target.closest('button[data-id]');if(!b)return;
+  busy(b,async()=>{
+    const hidden=b.dataset.h==='1';
+    await api('hide',{id:b.dataset.id,hidden});
+    S[tab].items.find(p=>p.id===b.dataset.id).hidden=hidden;renderPosts();
+    note(hidden?'Hidden. It disappears from your website within about 2 minutes.':'Visible again on your website within about 2 minutes.');
+  });
+};
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
+  tab=b.dataset.t;document.querySelectorAll('.tabs button').forEach(x=>x.setAttribute('aria-selected',x===b));renderPosts();
+});
+$('igConnect').onclick=()=>busy($('igConnect'),async()=>{const {url}=await api('ig-connect-url');location.href=url});
+$('igDisconnect').onclick=()=>{if(confirm('Disconnect Instagram? Reels already on your website stay until you hide them.'))busy($('igDisconnect'),async()=>{S=await api('ig-disconnect');render();note('Instagram disconnected.')})};
+$('igSaveToken').onclick=()=>busy($('igSaveToken'),async()=>{
+  const t=$('igToken').value.trim();if(!t)throw new Error('Paste a token first.');
+  $('igSaveToken').textContent='Saving…';
+  const r=await api('ig-token',{token:t});$('igToken').value='';note('Connected as @'+r.username+'. Reels are syncing.');await load();
+});
+$('ytSave').onclick=()=>busy($('ytSave'),async()=>{
+  $('ytSave').textContent='Checking…';
+  await api('save-settings',{youtubeChannel:$('ytChannel').value});
+  $('ytSave').textContent='Syncing…';S=await api('sync',{only:'youtube'});render();note('YouTube channel saved and synced.');
+});
+const toggle=(id,key)=>$(id).onchange=e=>busy(e.target,async()=>{S=await api('save-settings',{[key]:e.target.checked});render();note('Saved.')});
+toggle('igEnabled','instagramEnabled');toggle('ytEnabled','youtubeEnabled');toggle('autoSync','autoSync');
+$('freq').onchange=e=>busy(e.target,async()=>{S=await api('save-settings',{frequencyHours:+e.target.value});render();note('Saved.')});
+$('syncNow').onclick=()=>busy($('syncNow'),async()=>{
+  $('syncNow').textContent='Syncing… (up to a minute)';
+  S=await api('sync');render();
+  if(!S.instagram.error&&!S.youtube.error)note('Sync finished.');
+});
+
+// Messages after coming back from Instagram
+const q=new URLSearchParams(location.search);
+const ig=q.get('ig');
+if(ig==='connected')note('Instagram connected. Your reels are synced.','ok');
+if(ig==='denied')note('Instagram connection was cancelled.','info');
+if(ig==='expired')note('The connection took too long. Click Connect Instagram again.','err');
+if(ig==='failed')note('Instagram connection failed: '+(q.get('msg')||'unknown error'),'err',true);
+if(ig)history.replaceState(null,'',location.pathname);
+
+if(TOKEN){load();setInterval(()=>{if(!document.hidden)load()},120000)}
+</script>
+</body>
+</html>
