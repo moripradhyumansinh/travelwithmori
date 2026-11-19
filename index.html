@@ -33,7 +33,7 @@ a{color:inherit;text-decoration:none}
 
 /* hero */
 .head{display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap;padding:56px 0 30px}
-.head h1{font:800 clamp(3rem,8vw,5.6rem);line-height:1;letter-spacing:-.025em}
+.head h1{font:800 clamp(3rem,8vw,5.6rem) var(--head);line-height:1;letter-spacing:-.025em}
 .head p{font:800 1.4rem/1.3 var(--head);max-width:16em}
 .head p b{color:var(--orange)}
 .soc{display:flex;gap:12px}
@@ -51,7 +51,7 @@ a{color:inherit;text-decoration:none}
 @media(max-width:760px){.finder{position:static;transform:none;width:100%;margin-top:16px;flex-wrap:wrap;border-radius:24px;padding:14px}.finder label{flex:1 1 40%;border:0}.finder .btn{width:100%;justify-content:center}.navbar .wrap{gap:18px;overflow-x:auto}.topbar{grid-template-columns:1fr}.topbar .l,.topbar .r{display:none}.logo{justify-content:center}}
 
 section{padding:70px 0}
-h2{font:800 clamp(2rem,4.5vw,3.1rem);line-height:1.1;letter-spacing:-.02em;margin-bottom:10px}
+h2{font:800 clamp(2rem,4.5vw,3.1rem) var(--head);line-height:1.1;letter-spacing:-.02em;margin-bottom:10px}
 .lead{color:var(--leaf);max-width:52ch;margin-bottom:36px}
 
 /* gallery */
@@ -64,12 +64,67 @@ h2{font:800 clamp(2rem,4.5vw,3.1rem);line-height:1.1;letter-spacing:-.02em;margi
 .grid .cnt{display:none}
 .empty{color:var(--leaf)}
 
-/* reels */
-#reels{background:var(--white)}
-.reels{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;align-items:start}
-.card{background:var(--cream);border-radius:26px;padding:12px;border:1px solid var(--line)}
-.reels .instagram-media{margin:0!important;min-width:0!important;max-width:100%!important;width:100%!important;border-radius:18px!important}
-.follow{margin-top:36px}
+/* social icons */
+.bico{width:17px;height:17px;fill:currentColor;display:block}
+.soc img.cico,.mini img.cico{width:18px;height:18px;object-fit:contain;border-radius:4px}
+.mini{display:flex;gap:14px;align-items:center}
+.mini a{display:grid;place-items:center;opacity:.85;transition:.2s}
+.mini a:hover{opacity:1;color:var(--orange)}
+.footsoc{display:flex;gap:10px;justify-content:center;margin-bottom:14px;flex-wrap:wrap}
+.footsoc a{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--white);border:1px solid var(--line);transition:.2s}
+.footsoc a:hover{background:var(--green);color:var(--cream);border-color:var(--green)}
+
+/* social feed */
+#social{background:var(--white)}
+.sechead{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:12px}
+.sechead .lead{margin-bottom:0}
+.fblock{margin-top:46px}
+.fbhead{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+.fbhead h3{font:800 1.55rem var(--head);letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+.fbhead h3 .bico{width:22px;height:22px}
+.ghost{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--green);border-radius:99px;padding:9px 18px;font-weight:600;font-size:.95rem;transition:.2s}
+.ghost:hover{background:var(--green);color:var(--cream)}
+.tabs{display:flex;gap:6px;background:var(--cream);border-radius:99px;padding:5px}
+.tabs button{border:0;background:none;font:600 .92rem var(--body);color:var(--green);padding:8px 16px;border-radius:99px;cursor:pointer;transition:.2s}
+.tabs button[aria-selected=true]{background:var(--green);color:var(--cream)}
+.rgrid{align-items:start;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:20px}
+.vgrid{align-items:start;display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:24px 20px}
+.vgrid.shorts{grid-template-columns:repeat(auto-fill,minmax(190px,1fr))}
+.tile{display:flex;flex-direction:column;justify-content:flex-start;align-self:start;border:0;background:none;padding:0;text-align:left;font:inherit;color:inherit;cursor:pointer;width:100%}
+.thumb{position:relative;border-radius:20px;overflow:hidden;background:#e8dcc3;aspect-ratio:9/16}
+.vgrid .thumb{aspect-ratio:16/9;border-radius:18px}
+.vgrid.shorts .thumb{aspect-ratio:9/16;border-radius:20px}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s}
+.tile:hover .thumb img,.tile:focus-visible .thumb img{transform:scale(1.05)}
+.thumb:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,35,20,.25),transparent 30%,transparent 55%,rgba(5,35,20,.75))}
+.play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.22);backdrop-filter:blur(6px);border:1.5px solid rgba(255,255,255,.7);transition:.25s}
+.play svg{width:22px;height:22px;fill:#fff;margin-left:3px}
+.tile:hover .play{background:var(--orange);border-color:var(--orange);transform:translate(-50%,-50%) scale(1.08)}
+.ytplay{width:62px;height:44px;border-radius:14px;background:rgba(20,20,20,.72);border:0}
+.tile:hover .ytplay{background:#ff0033}
+.brand{position:absolute;top:12px;right:12px;z-index:2;color:#fff}
+.brand .bico{width:20px;height:20px}
+.chip{position:absolute;z-index:2;bottom:12px;display:inline-flex;align-items:center;gap:5px;color:#fff;font-size:.82rem;font-weight:600;padding:4px 10px;border-radius:99px;background:rgba(0,0,0,.45);backdrop-filter:blur(4px)}
+.chip.l{left:12px}.chip.r{right:12px}
+.chip svg{width:13px;height:13px;fill:#fff}
+.cap{margin-top:10px;font-size:.93rem;line-height:1.45;color:var(--leaf);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.vtitle{margin-top:12px;font-weight:600;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.meta{font-size:.86rem;color:var(--leaf);margin-top:4px}
+.morebar{text-align:center;margin-top:30px}
+.feedempty{color:var(--leaf);margin-top:30px}
+.feedempty .ghost{margin:14px 8px 0 0}
+@media(max-width:600px){.rgrid,.vgrid.shorts{grid-template-columns:repeat(2,1fr);gap:12px}.vgrid{grid-template-columns:1fr}.play{width:48px;height:48px}.thumb{border-radius:16px}.tabs button{padding:7px 12px}}
+
+/* video player */
+.vp{position:fixed;inset:0;z-index:60;background:rgba(6,30,18,.94);display:none;align-items:center;justify-content:center;padding:20px}
+.vp.open{display:flex}
+.vp .frame{position:relative;width:min(1000px,100%);aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:#000}
+.vp .frame.tall{width:min(400px,100%,calc((100vh - 140px)*9/16));aspect-ratio:9/16}
+.vp .frame.ig{background:#fff;width:min(420px,100%);aspect-ratio:auto;height:min(760px,calc(100vh - 120px))}
+.vp iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vp .x{position:absolute;top:10px;right:16px;background:none;border:0;color:#fff;font-size:2.6rem;cursor:pointer;padding:6px 12px;line-height:1}
+.vp .open-on{position:absolute;bottom:18px;left:0;right:0;text-align:center}
+.vp .open-on a{color:#dfe9d8;text-decoration:underline;font-size:.95rem}
 
 /* about + contact */
 .about{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:60px;align-items:center}
@@ -94,10 +149,10 @@ footer{padding:30px 0 40px;text-align:center;font-size:.92rem;color:var(--leaf)}
 <div class="wrap topbar">
   <div class="l"><span class="soc-mini" id="miniSoc" style="display:flex;gap:14px"></span></div>
   <a class="logo" href="#top"><i></i>travelwithmori</a>
-  <div class="r"><a href="mailto:you@yourdomain.com">you@yourdomain.com</a></div>
+  <div class="r" aria-hidden="true"></div>
 </div>
 <div class="navbar"><div class="wrap" id="nav">
-  <a href="#top" class="on">Home</a><a href="#gallery">Photos</a><a href="#reels">Reels</a><a href="#about">About</a><a href="#contact">Contact</a>
+  <a href="#top" class="on">Home</a><a href="#gallery">Photos</a><a href="#social">Social</a><a href="#about">About</a><a href="#contact">Contact</a>
 </div></div>
 
 <main id="top">
@@ -124,11 +179,39 @@ footer{padding:30px 0 40px;text-align:center;font-size:.92rem;color:var(--leaf)}
     <p class="empty" id="empty" hidden>No photos match. Try another animal or place.</p>
   </div></section>
 
-  <section id="reels"><div class="wrap">
-    <h2>Latest reels</h2>
-    <p class="lead">Straight from @travelwithmori on Instagram.</p>
-    <div class="reels" id="reelGrid"></div>
-    <a class="btn follow" id="follow" href="https://www.instagram.com/travelwithmori" target="_blank" rel="noopener">Follow on Instagram</a>
+  <section id="social"><div class="wrap">
+    <div class="sechead">
+      <div><h2>From the field</h2><p class="lead">Reels and films from my travels, updated automatically.</p></div>
+      <div class="soc" id="socSec"></div>
+    </div>
+
+    <div class="fblock" id="igBlock" hidden>
+      <div class="fbhead">
+        <h3><span data-ico="instagram"></span>Instagram reels</h3>
+        <a class="ghost" id="igFollow" target="_blank" rel="noopener">Follow on Instagram</a>
+      </div>
+      <div class="rgrid" id="igGrid"></div>
+      <div class="morebar"><button class="btn" id="igMore" type="button" hidden>Load more reels</button></div>
+    </div>
+
+    <div class="fblock" id="ytBlock" hidden>
+      <div class="fbhead">
+        <h3><span data-ico="youtube"></span>YouTube</h3>
+        <div class="tabs" role="tablist" aria-label="Filter videos">
+          <button role="tab" aria-selected="true" data-f="all">All videos</button>
+          <button role="tab" aria-selected="false" data-f="short">Shorts</button>
+          <button role="tab" aria-selected="false" data-f="video">Videos</button>
+        </div>
+        <a class="ghost" id="ytFollow" target="_blank" rel="noopener">Subscribe</a>
+      </div>
+      <div class="vgrid" id="ytGrid" role="tabpanel"></div>
+      <div class="morebar"><button class="btn" id="ytMore" type="button" hidden>Load more videos</button></div>
+    </div>
+
+    <div class="feedempty" id="feedEmpty" hidden>
+      <p>New reels and videos will appear here soon. Meanwhile, find me on:</p>
+      <div id="feedEmptyLinks"></div>
+    </div>
   </div></section>
 
   <section id="about"><div class="wrap about">
@@ -147,7 +230,7 @@ footer{padding:30px 0 40px;text-align:center;font-size:.92rem;color:var(--leaf)}
   </div></div></section>
 </main>
 
-<footer>© <span id="yr"></span> Pradhyumansinh Mori · travelwithmori. All photographs are protected by copyright.</footer>
+<footer><div class="footsoc" id="footSoc"></div>© <span id="yr"></span> Pradhyumansinh Mori · travelwithmori. All photographs are protected by copyright.</footer>
 
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer">
   <button class="x" aria-label="Close">×</button>
@@ -157,16 +240,16 @@ footer{padding:30px 0 40px;text-align:center;font-size:.92rem;color:var(--leaf)}
   <p id="lbCap"></p>
 </div>
 
+<div class="vp" id="vp" role="dialog" aria-modal="true" aria-label="Video player">
+  <button class="x" aria-label="Close video">×</button>
+  <div class="frame" id="vpFrame"></div>
+  <p class="open-on"><a id="vpLink" target="_blank" rel="noopener">Open on Instagram</a></p>
+</div>
+
 <script>
-/* ============ EDIT THIS SECTION ============ */
-const INSTAGRAM_PROFILE = "https://www.instagram.com/travelwithmori";
-const SOCIALS = {instagram:INSTAGRAM_PROFILE};
-// Used only when BEHOLD_ID below is empty. Paste links of reels or posts you want shown.
-const REELS = [
-  "https://www.instagram.com/p/DdMTxmBNw0V/"
-];
-// Automatic sync: create a free feed at behold.so, then paste its feed ID here (see instructions).
-const BEHOLD_ID = "";
+/* Social links are managed in the admin: /admin → Social media → Social links.
+   These are used only if data/socials.json cannot be loaded. */
+let SOCIALS=[{platform:"instagram",label:"Instagram",url:"https://www.instagram.com/travelwithmori",enabled:true,header:true,footer:true}];
 let PHOTOS = [
   {src:"photos/tiger-01.jpg",   title:"Tiger at dawn, Tadoba",  cat:"Mammals", loc:"Tadoba"},
   {src:"photos/eagle-01.jpg",   title:"Crested serpent eagle",  cat:"Birds",   loc:"Tadoba"},
@@ -175,28 +258,42 @@ let PHOTOS = [
   {src:"photos/coast-01.jpg",   title:"Coastline at low tide",  cat:"Travel",  loc:"Kutch"},
   {src:"photos/village-01.jpg", title:"Morning market",         cat:"Travel",  loc:"Gir"}
 ];
-/* ============================================ */
 
-/* icons */
-const IC={
- instagram:'<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".6"/>',
- youtube:'<rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10 9.5v5l4.5-2.5z"/>',
- facebook:'<path d="M14 8.5h2.5V5H14c-2.2 0-3.5 1.4-3.5 3.6V11H8v3.5h2.5V21H14v-6.5h2.5L17 11h-3V9.2c0-.5.2-.7 1-.7z"/>'};
-const svg=n=>`<svg class="ico" viewBox="0 0 24 24" aria-hidden="true">${IC[n]}</svg>`;
-document.getElementById('soc').innerHTML=Object.entries(SOCIALS).map(([n,u])=>`<a href="${u}" target="_blank" rel="noopener" aria-label="${n}">${svg(n)}</a>`).join('');
-document.getElementById('miniSoc').innerHTML=Object.entries(SOCIALS).map(([n,u])=>`<a href="${u}" target="_blank" rel="noopener" aria-label="${n}">${svg(n)}</a>`).join('');
-document.getElementById('yr').textContent=new Date().getFullYear();
-document.getElementById('follow').href=INSTAGRAM_PROFILE;
+/* helpers */
+const $=id=>document.getElementById(id);
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const safeUrl=u=>/^(https?:|mailto:|tel:)/i.test(String(u||'').trim())?String(u).trim():'';
+
+/* official platform icons (Simple Icons, CC0) */
+const BRAND={"instagram":"M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077","youtube":"M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z","facebook":"M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z","tiktok":"M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z","x":"M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z","pinterest":"M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z","whatsapp":"M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z","threads":"M18.263 11.097c-.03-3.486-1.92-5.586-5.111-5.586-2.13 0-3.922.963-4.863 2.499l2.062 1.438c.535-.843 1.272-1.543 2.628-1.543 1.528 0 2.318.85 2.544 2.431a15 15 0 0 0-2.236-.173c-4.125 0-6.068 1.867-6.068 4.336s1.943 3.99 4.804 3.99c3.139 0 5.013-2.115 5.781-4.735.798.361 1.348 1.204 1.348 2.47 0 3.387-3.907 5.232-7.22 5.232-4.885 0-8.077-3.207-8.077-8.424 0-6.392 4.223-10.487 9.9-10.487 3.808 0 5.69 1.671 6.97 3.914l2.108-1.475C21.44 2.078 18.331 0 13.663 0 6.227 0 1.168 5.277 1.168 12.934c0 7 4.953 11.066 10.856 11.066 4.878 0 9.809-2.846 9.809-7.716 0-2.545-1.46-4.231-3.569-5.187m-6.33 4.855c-1.077 0-2.026-.512-2.026-1.453 0-1.483 1.822-1.934 3.606-1.934.678 0 1.34.045 1.927.173-.422 1.927-1.671 3.215-3.508 3.214Z","snapchat":"M12.206.793c.99 0 4.347.276 5.93 3.821.529 1.193.403 3.219.299 4.847l-.003.06c-.012.18-.022.345-.03.51.075.045.203.09.401.09.3-.016.659-.12 1.033-.301.165-.088.344-.104.464-.104.182 0 .359.029.509.09.45.149.734.479.734.838.015.449-.39.839-1.213 1.168-.089.029-.209.075-.344.119-.45.135-1.139.36-1.333.81-.09.224-.061.524.12.868l.015.015c.06.136 1.526 3.475 4.791 4.014.255.044.435.27.42.509 0 .075-.015.149-.045.225-.24.569-1.273.988-3.146 1.271-.059.091-.12.375-.164.57-.029.179-.074.36-.134.553-.076.271-.27.405-.555.405h-.03c-.135 0-.313-.031-.538-.074-.36-.075-.765-.135-1.273-.135-.3 0-.599.015-.913.074-.6.104-1.123.464-1.723.884-.853.599-1.826 1.288-3.294 1.288-.06 0-.119-.015-.18-.015h-.149c-1.468 0-2.427-.675-3.279-1.288-.599-.42-1.107-.779-1.707-.884-.314-.045-.629-.074-.928-.074-.54 0-.958.089-1.272.149-.211.043-.391.074-.54.074-.374 0-.523-.224-.583-.42-.061-.192-.09-.389-.135-.567-.046-.181-.105-.494-.166-.57-1.918-.222-2.95-.642-3.189-1.226-.031-.063-.052-.15-.055-.225-.015-.243.165-.465.42-.509 3.264-.54 4.73-3.879 4.791-4.02l.016-.029c.18-.345.224-.645.119-.869-.195-.434-.884-.658-1.332-.809-.121-.029-.24-.074-.346-.119-1.107-.435-1.257-.93-1.197-1.273.09-.479.674-.793 1.168-.793.146 0 .27.029.383.074.42.194.789.3 1.104.3.234 0 .384-.06.465-.105l-.046-.569c-.098-1.626-.225-3.651.307-4.837C7.392 1.077 10.739.807 11.727.807l.419-.015h.06z","telegram":"M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z","linkedin":"M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z","website":"M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24zm7.94 7h-3.2a18.6 18.6 0 0 0-1.6-4.3A10.04 10.04 0 0 1 19.94 7zM12 2.04c.9 1.3 1.62 2.97 2.07 4.96H9.93C10.38 5 11.1 3.34 12 2.04zM2.26 14a10.1 10.1 0 0 1 0-4h3.55a20 20 0 0 0 0 4H2.26zm.8 3h3.2c.36 1.56.9 3.02 1.6 4.3A10.04 10.04 0 0 1 3.06 17zm3.2-10h-3.2a10.04 10.04 0 0 1 4.8-4.3C7.16 3.98 6.62 5.44 6.26 7zM12 21.96c-.9-1.3-1.62-2.97-2.07-4.96h4.14c-.45 2-1.17 3.66-2.07 4.96zM14.34 14H9.66a17.6 17.6 0 0 1 0-4h4.68a17.6 17.6 0 0 1 0 4zm.53 7.3c.7-1.28 1.24-2.74 1.6-4.3h3.2a10.04 10.04 0 0 1-4.8 4.3zM18.19 14a20 20 0 0 0 0-4h3.55a10.1 10.1 0 0 1 0 4h-3.55z","email":"M2 4h20a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm10 8.6L22 6.5V6H2v.5l10 6.1zM2 8.85V18h20V8.85l-10 6.1-10-6.1z","link":"M10.6 13.4a1 1 0 0 1 0-1.4l3.5-3.5a1 1 0 1 1 1.4 1.4L12 13.4a1 1 0 0 1-1.4 0zM8.5 21a5.5 5.5 0 0 1-3.9-9.4l2.5-2.5a1 1 0 0 1 1.4 1.4L6 13a3.5 3.5 0 0 0 5 5l2.5-2.5a1 1 0 0 1 1.4 1.4L12.4 19.4A5.5 5.5 0 0 1 8.5 21zm8.4-6.7a1 1 0 0 1-.7-1.7l2.5-2.5a3.5 3.5 0 0 0-5-5L11.2 7.6A1 1 0 0 1 9.8 6.2l2.5-2.5a5.5 5.5 0 0 1 7.8 7.8l-2.5 2.5a1 1 0 0 1-.7.3z"};
+const NAMES={instagram:'Instagram',youtube:'YouTube',facebook:'Facebook',linkedin:'LinkedIn',tiktok:'TikTok',x:'X',pinterest:'Pinterest',whatsapp:'WhatsApp',threads:'Threads',snapchat:'Snapchat',telegram:'Telegram',website:'Website',email:'Email',custom:'Link'};
+const bsvg=n=>`<svg class="bico" viewBox="0 0 24 24" aria-hidden="true"><path d="${BRAND[n]||BRAND.link}"/></svg>`;
+const iconFor=l=>l.icon?`<img class="cico" src="${esc(l.icon)}" alt="" loading="lazy">`:bsvg(l.platform);
+const linkHtml=l=>{const u=safeUrl(l.url);if(!u)return'';const name=l.label||NAMES[l.platform]||'Link';
+  const ext=/^https?:/i.test(u)?' target="_blank" rel="noopener"':'';
+  return `<a href="${esc(u)}"${ext} aria-label="${esc(name)}" title="${esc(name)}">${iconFor(l)}</a>`};
+function renderSocials(){
+  const on=SOCIALS.filter(l=>l.enabled!==false&&safeUrl(l.url));
+  const head=on.filter(l=>l.header!==false).map(linkHtml).join('');
+  $('miniSoc').innerHTML=head;$('soc').innerHTML=head;$('socSec').innerHTML=head;
+  $('footSoc').innerHTML=on.filter(l=>l.footer!==false).map(linkHtml).join('');
+  $('feedEmptyLinks').innerHTML=on.map(l=>{const u=safeUrl(l.url);return `<a class="ghost" href="${esc(u)}" target="_blank" rel="noopener">${iconFor(l)} ${esc(l.label||NAMES[l.platform]||'Link')}</a>`}).join('');
+  document.querySelectorAll('[data-ico]').forEach(e=>e.innerHTML=bsvg(e.dataset.ico));
+}
+$('miniSoc').className='mini';
+renderSocials();
+fetch('data/socials.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(d=>{if(d&&Array.isArray(d.links)){SOCIALS=d.links;renderSocials()}}).catch(()=>{});
+$('yr').textContent=new Date().getFullYear();
 
 /* nav highlight */
 const links=[...document.querySelectorAll('#nav a')];
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id))}),{rootMargin:'-45% 0px -50% 0px'});
-['top','gallery','reels','about','contact'].forEach(id=>io.observe(document.getElementById(id)));
+['top','gallery','social','about','contact'].forEach(id=>io.observe(document.getElementById(id)));
 
 /* gallery + finder */
 const grid=document.getElementById('grid'),empty=document.getElementById('empty');
 const selCat=document.getElementById('selCat'),selLoc=document.getElementById('selLoc');
-const fill=(el,key,all)=>el.innerHTML=[all,...new Set(PHOTOS.map(p=>p[key]))].map(v=>`<option>${v}</option>`).join('');
+const fill=(el,key,all)=>el.innerHTML=[all,...new Set(PHOTOS.map(p=>p[key]).filter(Boolean))].map(v=>`<option>${esc(v)}</option>`).join('');
 let shown=[],idx=0;
 function initGallery(){fill(selCat,'cat','All animals');fill(selLoc,'loc','All places');render();}
 function render(){
@@ -205,7 +302,7 @@ function render(){
   grid.innerHTML='';empty.hidden=shown.length>0;
   shown.forEach((p,i)=>{
     const f=document.createElement('figure');f.tabIndex=0;
-    f.innerHTML='<img loading="lazy" alt="'+p.title+'" src="'+p.src+'"><figcaption>'+p.title+'</figcaption>';
+    f.innerHTML='<img loading="lazy" decoding="async" alt="'+esc(p.title)+'" src="'+esc(p.src)+'"><figcaption>'+esc(p.title)+'</figcaption>';
     f.onclick=()=>openLb(i);f.onkeydown=e=>{if(e.key==='Enter')openLb(i)};
     grid.appendChild(f);
   });
@@ -230,24 +327,99 @@ document.addEventListener('keydown',e=>{
   if(e.key==='ArrowRight')step(1);
 });
 
-/* instagram reels */
-const reelGrid=document.getElementById('reelGrid');
-if(BEHOLD_ID){
-  const c=document.createElement('div');c.className='card';c.style.gridColumn='1/-1';
-  c.innerHTML='<div data-behold-id="'+BEHOLD_ID+'"></div>';reelGrid.appendChild(c);
-  const bs=document.createElement('script');bs.src='https://widgets.behold.so/ig.js';bs.defer=true;document.body.appendChild(bs);
+/* ===== social feed: Instagram reels + YouTube (synced automatically) ===== */
+const fmtN=n=>new Intl.NumberFormat('en',{notation:'compact',maximumFractionDigits:1}).format(n);
+const fmtD=d=>d?new Date(d).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}):'';
+const fmtT=s=>{s=Math.round(s||0);const h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=String(s%60).padStart(2,'0');return h?`${h}:${String(m).padStart(2,'0')}:${x}`:`${m}:${x}`};
+const PLAY='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg>';
+const EYE='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5C6.5 5 2.7 9.2 1.5 12c1.2 2.8 5 7 10.5 7s9.3-4.2 10.5-7C21.3 9.2 17.5 5 12 5zm0 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"/></svg>';
+const PAGE=window.matchMedia('(max-width:600px)').matches?6:12;
+let IG=[],YT=[],igShown=0,ytShown=0,ytFilter='all';
+
+function reelTile(r){
+  const views=Number.isFinite(r.views)?`<span class="chip l">${PLAY} ${fmtN(r.views)} views</span>`:'';
+  const cap=r.caption?esc(r.caption.split('\n')[0]):'';
+  return `<button class="tile" type="button" data-id="${esc(r.id)}" aria-label="Play reel${cap?': '+cap:''}">
+    <div class="thumb">${r.thumb?`<img src="${esc(r.thumb)}" alt="" loading="lazy" decoding="async" onerror="this.remove()">`:''}
+      <span class="brand">${bsvg('instagram')}</span><span class="play">${PLAY}</span>${views}</div>
+    ${cap?`<p class="cap">${cap}</p>`:''}</button>`;
 }
-(BEHOLD_ID?[]:REELS).forEach(url=>{
-  const q=document.createElement('blockquote');
-  q.className='instagram-media';
-  q.setAttribute('data-instgrm-permalink',url);
-  q.setAttribute('data-instgrm-version','14');
-  const w=document.createElement('div');w.className='card';w.appendChild(q);
-  reelGrid.appendChild(w);
+function videoTile(v,tall){
+  const small=`https://i.ytimg.com/vi/${encodeURIComponent(v.videoId)}/mqdefault.jpg`;
+  const views=Number.isFinite(v.views)?`${fmtN(v.views)} views · `:'';
+  const badge=v.type==='short'?`<span class="chip r">Shorts</span>`:`<span class="chip r">${fmtT(v.duration)}</span>`;
+  return `<button class="tile" type="button" data-id="${esc(v.id)}" aria-label="Play video: ${esc(v.title)}">
+    <div class="thumb"><img src="${tall?esc(v.thumb):small}" ${tall?'':`srcset="${small} 320w, ${esc(v.thumb)} 1280w" sizes="(max-width:600px) 92vw, 380px"`} alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.removeAttribute('srcset');this.src='https://i.ytimg.com/vi/${encodeURIComponent(v.videoId)}/hqdefault.jpg'">
+      <span class="brand">${bsvg('youtube')}</span><span class="play ytplay">${PLAY}</span>${badge}</div>
+    <p class="vtitle">${esc(v.title)}</p><p class="meta">${views}${fmtD(v.publishedAt)}</p></button>`;
+}
+function drawIG(more){
+  if(!more)igShown=0;
+  igShown=Math.min(IG.length,igShown+PAGE);
+  $('igGrid').innerHTML=IG.slice(0,igShown).map(reelTile).join('');
+  $('igMore').hidden=igShown>=IG.length;
+}
+function ytList(){return ytFilter==='all'?YT:YT.filter(v=>v.type===ytFilter)}
+function drawYT(more){
+  const list=ytList();
+  if(!more)ytShown=0;
+  ytShown=Math.min(list.length,ytShown+PAGE);
+  const tall=ytFilter==='short';
+  $('ytGrid').className='vgrid'+(tall?' shorts':'');
+  $('ytGrid').innerHTML=list.length?list.slice(0,ytShown).map(v=>videoTile(v,tall)).join(''):'<p class="meta">Nothing here yet.</p>';
+  $('ytMore').hidden=ytShown>=list.length;
+}
+$('igMore').onclick=()=>drawIG(true);
+$('ytMore').onclick=()=>drawYT(true);
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
+  ytFilter=b.dataset.f;
+  document.querySelectorAll('.tabs button').forEach(x=>x.setAttribute('aria-selected',x===b));
+  drawYT();
 });
-if(!BEHOLD_ID){const s=document.createElement('script');
-s.async=true;s.src='https://www.instagram.com/embed.js';
-document.body.appendChild(s);}
+
+/* player: nothing plays until the visitor clicks */
+const vp=$('vp'),vpFrame=$('vpFrame'),vpLink=$('vpLink');
+function openVideo(item){
+  if(item.source==='instagram'){
+    vpFrame.className='frame ig';
+    vpFrame.innerHTML=item.embed?`<iframe src="${esc(item.embed)}" title="Instagram reel" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`:'';
+    vpLink.textContent='Open on Instagram';
+  }else{
+    vpFrame.className='frame'+(item.type==='short'?' tall':'');
+    vpFrame.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(item.videoId)}?autoplay=1&rel=0&playsinline=1&modestbranding=1" title="${esc(item.title)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
+    vpLink.textContent='Watch on YouTube';
+  }
+  vpLink.href=item.url;
+  vp.classList.add('open');document.body.style.overflow='hidden';
+  vp.querySelector('.x').focus();
+}
+function closeVideo(){vp.classList.remove('open');vpFrame.innerHTML='';document.body.style.overflow=''}
+vp.querySelector('.x').onclick=closeVideo;
+vp.onclick=e=>{if(e.target===vp)closeVideo()};
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&vp.classList.contains('open'))closeVideo()});
+$('social').addEventListener('click',e=>{
+  const t=e.target.closest('.tile');if(!t)return;
+  const item=[...IG,...YT].find(x=>x.id===t.dataset.id);if(!item)return;
+  // very small phones: open the app/site directly, it plays more smoothly there
+  if(window.innerWidth<360){window.open(item.url,'_blank','noopener');return}
+  openVideo(item);
+});
+
+fetch('/api/social-feed').then(r=>r.ok?r.json():null).then(d=>{
+  IG=d?.instagram?.items||[];YT=d?.youtube?.items||[];
+  const igUrl=d?.instagram?.profile?.url||SOCIALS.find(l=>l.platform==='instagram')?.url;
+  const ytUrl=d?.youtube?.profile?.url||SOCIALS.find(l=>l.platform==='youtube')?.url;
+  if(igUrl)$('igFollow').href=igUrl;else $('igFollow').hidden=true;
+  if(ytUrl)$('ytFollow').href=ytUrl;else $('ytFollow').hidden=true;
+  $('igBlock').hidden=!IG.length;$('ytBlock').hidden=!YT.length;
+  if(IG.length)drawIG();
+  if(YT.length){
+    const hasS=YT.some(v=>v.type==='short'),hasV=YT.some(v=>v.type==='video');
+    if(!hasS||!hasV)document.querySelector('.tabs').hidden=true;
+    drawYT();
+  }
+  $('feedEmpty').hidden=!!(IG.length||YT.length);
+}).catch(()=>{$('feedEmpty').hidden=false});
 </script>
 </body>
 </html>

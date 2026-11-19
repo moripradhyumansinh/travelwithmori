@@ -1,0 +1,9 @@
+{
+  "name": "travelwithmori",
+  "private": true,
+  "type": "module",
+  "description": "travelwithmori website with Instagram and YouTube auto-sync",
+  "dependencies": {
+    "@netlify/blobs": "^11.1.0"
+  }
+}
